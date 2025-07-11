@@ -117,6 +117,7 @@ export default {
     [134, '2.2'],
     [135, '2.3'],
     [137, '2.3.2'],
+    [137, '2.4'],
   ],
   // https://releases.electronjs.org/
   // https://github.com/electron/electron/releases
@@ -175,6 +176,8 @@ export default {
     [134, '35.0'],
     [136, '36.0'],
     [138, '37.0'],
+    [139, '38.0'],
+    [140, '39.0'],
   ],
   // https://github.com/mdn/browser-compat-data/blob/main/browsers/opera.json
   ChromeToOpera(chrome) {
@@ -280,6 +283,7 @@ export default {
     [132, 87],
     [134, 88],
     [135, 89],
+    [137, 90],
   ],
   // https://developers.meta.com/horizon/documentation/web/browser-release-notes/
   // https://www.meta.com/experiences/browser/1916519981771802/
@@ -321,6 +325,8 @@ export default {
     [128, '35.0'],
     [130, '36.0'],
     [132, '37.0'],
+    [134, '38.0'],
+    [136, '39.0'],
   ],
   // https://github.com/mdn/browser-compat-data/blob/main/browsers/firefox_android.json
   FirefoxToFirefoxAndroid(firefox) {

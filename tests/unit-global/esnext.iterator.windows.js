@@ -1,3 +1,4 @@
+import { STRICT } from '../helpers/constants.js';
 import { createIterator } from '../helpers/helpers.js';
 
 const { from } = Array;
@@ -13,6 +14,7 @@ QUnit.test('Iterator#windows', assert => {
 
   assert.arrayEqual(from(windows.call(createIterator([1, 2, 3]), 2)), [[1, 2], [2, 3]], 'basic functionality #1');
   assert.arrayEqual(from(windows.call(createIterator([1, 2, 3, 4]), 2)), [[1, 2], [2, 3], [3, 4]], 'basic functionality #2');
+  assert.arrayEqual(from(windows.call(createIterator([1, 2]), 3)), [], 'basic functionality #3');
   assert.arrayEqual(from(windows.call(createIterator([]), 2)), [], 'basic functionality on empty iterable');
 
   const it = createIterator([1, 2, 3]);
@@ -24,10 +26,12 @@ QUnit.test('Iterator#windows', assert => {
   assert.deepEqual(result.return(), { done: true, value: undefined }, '.return with active inner iterator result');
   assert.deepEqual(result.next(), { done: true, value: undefined }, '.return with active inner iterator result on closed iterator');
 
-  assert.throws(() => windows.call('', 1), TypeError, 'iterable non-object this');
-  assert.throws(() => windows.call(undefined, 1), TypeError, 'non-iterable-object this #1');
-  assert.throws(() => windows.call(null, 1), TypeError, 'non-iterable-object this #2');
-  assert.throws(() => windows.call(5, 1), TypeError, 'non-iterable-object this #3');
+  if (STRICT) {
+    assert.throws(() => windows.call('', 1), TypeError, 'iterable non-object this');
+    assert.throws(() => windows.call(undefined, 1), TypeError, 'non-iterable-object this #1');
+    assert.throws(() => windows.call(null, 1), TypeError, 'non-iterable-object this #2');
+    assert.throws(() => windows.call(5, 1), TypeError, 'non-iterable-object this #3');
+  }
 
   assert.throws(() => windows.call(it), RangeError, 'throws on empty argument');
   assert.throws(() => windows.call(it, -1), RangeError, 'throws on negative argument');
